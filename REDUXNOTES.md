@@ -15,12 +15,14 @@
 -   Invoke the createStore function = `const store = createStore()`
 -   Create a mock reducer to be held in the store (temporarily) to see if working:
 
-```const tempReducer = (() => {
+```const reducer = (() => {
     return {
         title: "Hello from the Redux Store!"
     }
 })
 ```
+
+-   Pass the reducer into the store
 
 A reducer is a FUNCTION the returns an OBJECT that is our state tree
 
@@ -99,6 +101,53 @@ export const addMovie = movieTitle => {
 
 (In the Car Sales project, you are shown what functions are needed in the components)
 
-AT THIS POINT THE ACTIONS HAVE BEEN CREATED AND PASSED TO THE COMPONENTS. NOW WE NEED TO ADD THE LOGIC WITH REDUCERS. YOU MIGHT BE GETTING `TYPEERROR: IS NOT A FUNCTION` MESSAGES. THIS IS NORMAL. LETS KEEP GOING.
+AT THIS POINT THE ACTIONS HAVE BEEN CREATED AND PASSED TO THE COMPONENTS. NOW WE NEED TO ADD THE LOGIC WITH REDUCERS. YOU MIGHT BE GETTING `TYPEERROR: IS NOT A FUNCTION` MESSAGES. THIS IS NOT NORMAL. FIX THEM.
+
+## Prepare for REDUCERS
+
+At this point we are still using a temporary reducer. Let's update our reducer to use our initial state that is currently located in the App.
+
+1. Create an reducer folder and file (reducers/reducers.js)
+2. in the file add the data to a variable `const initialState`. There should be no more state data in your component
+3. Import the necessary action type variables
+4. Create a simple reducer like we did at the start of this document. Remember to export it.
+
+    ```
+    export const reducer = (state = initialState) => {
+        console.log("reducer")
+
+    }
+    ```
+
+5. In index.js or wherever your `store` is, import reducer to that file.
+6. Back in reducers.js, pass `state=initialState` to the reducer.
+7. Pass the state object to components as needed. like you did with action creators.
+
+YOU WILL RECIEVE AN ERROR SAYING STATE IS UNDEFINED. WE NEED TO ADD OUR ACTION and SWITCH/CASE. LET'S KEEP GOING.
 
 ## REDUCERS
+
+-   Reducers are pure functions
+-   Reducers take in the current state tree and an action as arguments
+-   Using a switch/case to check the action type of the dispatched action, create an updated state tree based on the action type and the action payload
+-   Each case in teh switch statement returns a new, updated state tree triggering the UI to re-render with the new data!
+
+1. In the reducer function, along with state with its default value of initialState, pass in the dispatched action
+2. Add a switch statement and checking for the action type
+3. Make a case for each action type
+4. Update and return the state tree
+5. For default (always needed) return state untouched
+
+```
+export const reducer = (state = initialState, action) => {
+    console.log("reducer function", action)
+    switch (action.type) {
+        case ADD_FEATURE:
+            return {<!-- add logic -->};
+        case REMOVE_FEATURE:
+            return {<!-- add logic -->};
+        default:
+            return state;
+    }
+}
+```
