@@ -15,16 +15,15 @@
 -   Invoke the createStore function = `const store = createStore()`
 -   Create a mock reducer to be held in the store (temporarily) to see if working:
 
-```const reducer = (() => {
-    return {
-        title: "Hello from the Redux Store!"
-    }
-})
-```
+    ```
+        const reducer = (() => {
+        return {
+            title: "Hello from the Redux Store!"
+        }
+    })
+    ```
 
 -   Pass the reducer into the store
-
-A reducer is a FUNCTION the returns an OBJECT that is our state tree
 
 -   Import Provider from react-redux
 -   Wrap the App component in the Provider Component
@@ -127,6 +126,7 @@ YOU WILL RECIEVE AN ERROR SAYING STATE IS UNDEFINED. WE NEED TO ADD OUR ACTION a
 
 ## REDUCERS
 
+-   A reducer is a FUNCTION the returns an OBJECT that is our state tree
 -   Reducers are pure functions
 -   Reducers take in the current state tree and an action as arguments
 -   Using a switch/case to check the action type of the dispatched action, create an updated state tree based on the action type and the action payload
